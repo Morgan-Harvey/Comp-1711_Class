@@ -1,2 +1,2 @@
 # Comp-1711_Class
-computer science lessons code for procedural programming
+computer science code for procedural programming
