@@ -1,2 +1,4 @@
-# Comp-1711_Class
+# Comp-1711 Class
 Computer Science code for Procedural Programming
+
+class
