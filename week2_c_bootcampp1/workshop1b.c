@@ -2,6 +2,6 @@
 
 int main(){
     char Name[] = "Martin";
-    printf("%s", Name);
+    printf("%s\n", Name);
     return 0;
 }
