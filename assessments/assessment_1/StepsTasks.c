@@ -10,9 +10,13 @@ typedef struct {
 } FITNESS_DATA;
 
 // Define any additional variables here
- char filerecords[] = "./FitnessData_2023.csv";
- int count = 0;
- FITNESS_DATA recorddata[2048];
+    char filerecords[] = "./FitnessData_2023.csv"; // used to turn the file into a variable
+    int count = 0; // counts the number of records in the file
+    FITNESS_DATA recorddata[2048];
+    char date[11];
+    char time[6];
+    char steps[10];
+    
 
 // This is your helper function. Do not change it in any way.
 // Inputs: character array representing a row; the delimiter character
@@ -45,7 +49,7 @@ void tokeniseRecord(const char *input, const char *delimiter,
 // Complete the main function
 int main() {
     
-
+// opens the file and checks if it exists
 FILE *file;
 file = fopen(filerecords,"r");
 
@@ -55,27 +59,35 @@ if (file == NULL)
     return 1;
 }
 
+//creates a buffer to allow the program to read multiple lines
 int buf_size = 1024;
 char lin_buf[buf_size];
 
+
+// will read each row of the csv file
 while (fgets(lin_buf, buf_size, file))
 {
-    char date[15];
-    char time[15];
-    char steps[15];
 
+// seperates each row into their 3 parts: date , time, steps
     tokeniseRecord(lin_buf,",", date, time, steps);
-    int stepsInt = atoi(steps);
+    int  = atoi(steps);
 
     strcpy(recorddata[count].date, date);
     strcpy(recorddata[count].time, time);
-    recorddata[count].steps = stepsInt;
-    printf("%s/%s/%d\n", date, time, stepsInt);
+    strcpy(recorddata[count].steps, steps);
     count = count+1;
+
+
+    if (count <= 3)
+    {
+        printf("%s/%s/%d\n", date, time, stepsInt);
+    }
+    
     
 }
-
 printf("Number of records in file: %d\n", count);
 
 
+fclose(file);
+return 0;
 }
