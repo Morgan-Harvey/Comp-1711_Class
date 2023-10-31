@@ -12,6 +12,7 @@ typedef struct {
 // Define any additional variables here
  char filerecords[] = "./FitnessData_2023.csv";
  int count = 0;
+ FITNESS_DATA recorddata[2048];
 
 // This is your helper function. Do not change it in any way.
 // Inputs: character array representing a row; the delimiter character
@@ -59,10 +60,22 @@ char lin_buf[buf_size];
 
 while (fgets(lin_buf, buf_size, file))
 {
+    char date[15];
+    char time[15];
+    char steps[15];
+
+    tokeniseRecord(lin_buf,",", date, time, steps);
+    int stepsInt = atoi(steps);
+
+    strcpy(recorddata[count].date, date);
+    strcpy(recorddata[count].time, time);
+    recorddata[count].steps = stepsInt;
+    printf("%s/%s/%d\n", date, time, stepsInt);
     count = count+1;
     
 }
 
 printf("Number of records in file: %d\n", count);
+
 
 }
