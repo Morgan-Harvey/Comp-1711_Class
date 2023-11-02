@@ -64,7 +64,19 @@ int buf_size = 1024;
 char lin_buf[buf_size];
 
 
-// will read each row of the csv file
+// will read and count each record of the csv file
+while (fgets(lin_buf, buf_size, file))
+{
+    count = count+1; // 
+
+}
+printf("Number of records in file: %d\n", count);
+
+//rewinds the file and resets the record count to 0
+rewind(file);
+count = 0;
+
+//reads through the entire file
 while (fgets(lin_buf, buf_size, file))
 {
 
@@ -87,10 +99,8 @@ while (fgets(lin_buf, buf_size, file))
     
     
 }
-//prints the total number of records
-printf("Number of records in file: %d\n", count);
-
 //closes the file
 fclose(file);
+
 return 0;
 }
