@@ -10,10 +10,10 @@ typedef struct {
 } FITNESS_DATA;
 
 // Define any additional variables here
-    char filerecords[] = "./FitnessData_2023.csv"; // used to turn the file into a variable
-    int count = 0; // counts the number of records in the file
-    FITNESS_DATA recorddata[2048];
-    char date[11];
+    char filerecords[] = "./FitnessData_2023.csv";
+    int count = 0; 
+    FITNESS_DATA recorddata[2048]; 
+    char date[11]; 
     char time[6];
     char steps[5];
     
@@ -72,12 +72,14 @@ while (fgets(lin_buf, buf_size, file))
     tokeniseRecord(lin_buf,",", date, time, steps);
     int stepschar = atoi(steps);
 
+// copies each row of the csv and stores them in the struct
     strcpy(recorddata[count].date, date);
     strcpy(recorddata[count].time, time);
     recorddata[count].steps, stepschar;
-    count = count+1;
+    
+    count = count+1; // will count each record in the file
 
-
+//will limit the printing of records to the first three
     if (count <= 3)
     {
         printf("%s/%s/%d\n", date, time, stepschar);
@@ -85,9 +87,10 @@ while (fgets(lin_buf, buf_size, file))
     
     
 }
+//prints the total number of records
 printf("Number of records in file: %d\n", count);
 
-
+//closes the file
 fclose(file);
 return 0;
 }
