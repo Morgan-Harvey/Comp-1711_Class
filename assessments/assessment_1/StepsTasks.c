@@ -15,7 +15,7 @@ typedef struct {
     FITNESS_DATA recorddata[2048];
     char date[11];
     char time[6];
-    char steps[10];
+    char steps[5];
     
 
 // This is your helper function. Do not change it in any way.
@@ -70,17 +70,17 @@ while (fgets(lin_buf, buf_size, file))
 
 // seperates each row into their 3 parts: date , time, steps
     tokeniseRecord(lin_buf,",", date, time, steps);
-    int  = atoi(steps);
+    int stepschar = atoi(steps);
 
     strcpy(recorddata[count].date, date);
     strcpy(recorddata[count].time, time);
-    strcpy(recorddata[count].steps, steps);
+    recorddata[count].steps, stepschar;
     count = count+1;
 
 
     if (count <= 3)
     {
-        printf("%s/%s/%d\n", date, time, stepsInt);
+        printf("%s/%s/%d\n", date, time, stepschar);
     }
     
     
