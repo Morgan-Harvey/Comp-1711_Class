@@ -67,14 +67,17 @@ char lin_buf[buf_size];
 // will read and count each record of the csv file
 while (fgets(lin_buf, buf_size, file))
 {
-    count = count+1; // 
+    count = count+1; // counts each record of the file
 
 }
 printf("Number of records in file: %d\n", count);
 
-//rewinds the file and resets the record count to 0
-rewind(file);
+//closes the file and resets the record count to 0
+fclose(file);
 count = 0;
+
+//reopens file
+file = fopen(filerecords,"r");
 
 //reads through the entire file
 while (fgets(lin_buf, buf_size, file))
