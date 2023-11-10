@@ -12,6 +12,7 @@
     char date[11]; 
     char time[6];
     char steps[5];
+    
 // Global variables for filename and FITNESS_DATA array
 
 
@@ -64,32 +65,34 @@ int main() {
     switch(menu){
 
     case 'A':
-        printf("Input file: \n");
+        char filename[100];
+	    scanf("%s\n", filename);
+        printf("Input file: %s\n", filename);
     break;
 
     case 'B':
-            printf("Total records: \n");
+        printf("Total records: \n");
     break;
     
     case 'C':
-            printf("Fewest steps: \n");
+        printf("Fewest steps: \n");
     break;
 
     case 'D':
-            printf("Largest steps: \n");
+        printf("Largest steps: \n");
     break;
 
     case 'E':
-            printf("Mean step count: \n");
+        printf("Mean step count: \n");
     break;
 
     case 'F':
-            printf("Longest period start: \nLongest period end:  \n");
+        printf("Longest period start: \nLongest period end:  \n");
     break;
 
     case 'Q':
-            return 0;
-            break;
+        return 0;
+        break;
     break;
 
    }
