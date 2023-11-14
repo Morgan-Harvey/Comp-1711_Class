@@ -61,14 +61,26 @@ int main() {
     printf("Q: QUIT\n");
 
     scanf("%c", &menu);
+    if (menu != 'A' && menu != 'B' && menu !='C' && menu !='D' && menu !='E' && menu !='F' && menu !='Q')
+    {
+        printf("Invalid Choice: Try again\n");
+    }
+    
     char fname[100];
+
+
+    int buf_size = 1024;
+    char lin_buf[buf_size];
+    char filename[100] = "./";
+
+    
     switch(menu){
 
     case 'A':
         
         printf("Input file: ");
 	    scanf("%s", fname);
-        char filename[100] = "./";
+
 
         strcat(filename, fname);
 
@@ -76,15 +88,29 @@ int main() {
 
         if (file == NULL)
         {
-            printf("file does not exist!\n");
+            printf("ERROR: Could not find or open the file\n");
             break;
         }
+        else
+        {
+            printf("file successfully loaded\n");
+        }
 
-    
-        fclose;
+        fclose(file);
 
-    case 'B':
-        printf("Total records: \n");
+    case 'B': ;
+
+        file = fopen(filename,"r");
+
+
+        while (fgets(lin_buf, buf_size, file))
+        {
+            count = count+1; 
+
+        }
+        printf("Total records: %d\n", count);
+
+    fclose(file);
 
     break;
     
