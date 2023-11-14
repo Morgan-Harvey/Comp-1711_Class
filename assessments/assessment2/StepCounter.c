@@ -61,17 +61,31 @@ int main() {
     printf("Q: QUIT\n");
 
     scanf("%c", &menu);
-
+    char fname[100];
     switch(menu){
 
     case 'A':
-        char filename[100];
-	    scanf("%s\n", filename);
-        printf("Input file: %s\n", filename);
-    break;
+        
+        printf("Input file: ");
+	    scanf("%s", fname);
+        char filename[100] = "./";
+
+        strcat(filename, fname);
+
+        FILE *file = fopen(filename, "r");
+
+        if (file == NULL)
+        {
+            printf("file does not exist!\n");
+            break;
+        }
+
+    
+        fclose;
 
     case 'B':
         printf("Total records: \n");
+
     break;
     
     case 'C':
