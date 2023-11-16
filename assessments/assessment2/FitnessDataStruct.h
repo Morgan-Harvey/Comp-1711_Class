@@ -13,6 +13,15 @@ typedef struct {
 // Helper function prototypes
 void tokeniseRecord(const char *input, const char *delimiter, char *date, char *time, char *steps);
 
+void showmenuoptions(){
+    printf("A: Specify file name\n");
+    printf("B: Display total records in file\n");
+    printf("C: Find the date and time of the timeslot with the fewest steps\n");
+    printf("D: Find the date and time of the timeslot with the largest number of steps\n");
+    printf("E: Find the mean step count of all the records in the file\n");
+    printf("F: Find the longest continuous period where the step count is above 500 steps\n");
+    printf("Q: QUIT\n");
+}
 
 
 

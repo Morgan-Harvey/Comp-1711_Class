@@ -61,14 +61,7 @@ int main() {
     printf("Q: QUIT\n");
 
     scanf("%c", &menu);
-    if (menu != 'A' && menu != 'B' && menu !='C' && menu !='D' && menu !='E' && menu !='F' && menu !='Q')
-    {
-        printf("Invalid Choice: Try again\n");
-    }
-    
     char fname[100];
-
-
     int buf_size = 1024;
     char lin_buf[buf_size];
     char filename[100] = "./";
@@ -115,6 +108,8 @@ int main() {
     break;
     
     case 'C':
+
+        
         printf("Fewest steps: \n");
     break;
 
@@ -133,8 +128,9 @@ int main() {
     case 'Q':
         return 0;
         break;
-    break;
 
+    default:
+        printf("Invalid Choice: Try again\n");
    }
 
 
