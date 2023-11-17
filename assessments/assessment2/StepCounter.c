@@ -65,24 +65,7 @@ int main() {
     char lin_buf[buf_size];
     char filename[100] = "./";
 
-
-
-
-    FILE *file;
-
-    file = fopen(filename, "r");
-    int stepsint = 0;
-
-    while (fgets(lin_buf, buf_size, file))
-{   
-    tokeniseRecord(lin_buf,",", date, time, steps);
-    stepsint = atoi(steps);
-
-    strcpy(recorddata[count].date, date);
-    strcpy(recorddata[count].time, time);
-    recorddata[count].steps, stepsint;
-}
-fclose(file);
+    int stepsint = 0;    
 
     
     switch(menu){
@@ -94,7 +77,7 @@ fclose(file);
 
 
         strcat(filename, fname);
-
+        FILE *file = fopen(filename, "r");
         if (file == NULL)
         {
             printf("ERROR: Could not find or open the file\n");
@@ -104,6 +87,16 @@ fclose(file);
         {
             printf("file successfully loaded\n");
         }
+
+        while (fgets(lin_buf, buf_size, file)){
+
+        tokeniseRecord(lin_buf,",", date, time, steps);
+        stepsint = atoi(steps);
+
+        strcpy(recorddata[count].date, date);
+        strcpy(recorddata[count].time, time);
+        recorddata[count].steps, stepsint;
+    fclose(file);
 
     case 'B': ;
 
@@ -122,20 +115,12 @@ fclose(file);
 
     
     case 'C':
-        fopen(filename, "r");
 
-        while (stepsint < stepsint)
+        for (int i = 0; i < count; i++)
         {
-            printf("%s %s", date, time);
+        printf("%d\n", recorddata[i].steps);
         }
-        
-        
-        
-        
-
-
-        printf("Fewest steps: %d\n", stepsint);
-    break;
+            break;
 
     case 'D':
         printf("Largest steps: \n");
@@ -157,6 +142,6 @@ fclose(file);
         printf("Invalid Choice: Try again\n");
    }
 
-
+    }
 
 }
