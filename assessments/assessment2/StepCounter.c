@@ -6,7 +6,6 @@
 // Struct moved to header file
 
 // Define any additional variables here
-    char filerecords[] = "./FitnessData_2023.csv";
     int count = 0; 
     FITNESS_DATA recorddata[2048]; 
     char date[11]; 
@@ -51,7 +50,7 @@ void tokeniseRecord(const char *input, const char *delimiter,
 int main() {
 
     char menu;
-
+    printf("Menu Options\n");
     printf("A: Specify file name\n");
     printf("B: Display total records in file\n");
     printf("C: Find the date and time of the timeslot with the fewest steps\n");
@@ -66,6 +65,25 @@ int main() {
     char lin_buf[buf_size];
     char filename[100] = "./";
 
+
+
+
+    FILE *file;
+
+    file = fopen(filename, "r");
+    int stepsint = 0;
+
+    while (fgets(lin_buf, buf_size, file))
+{   
+    tokeniseRecord(lin_buf,",", date, time, steps);
+    stepsint = atoi(steps);
+
+    strcpy(recorddata[count].date, date);
+    strcpy(recorddata[count].time, time);
+    recorddata[count].steps, stepsint;
+}
+fclose(file);
+
     
     switch(menu){
 
@@ -77,8 +95,6 @@ int main() {
 
         strcat(filename, fname);
 
-        FILE *file = fopen(filename, "r");
-
         if (file == NULL)
         {
             printf("ERROR: Could not find or open the file\n");
@@ -89,11 +105,9 @@ int main() {
             printf("file successfully loaded\n");
         }
 
-        fclose(file);
-
     case 'B': ;
 
-        file = fopen(filename,"r");
+        fopen(filename,"r");
 
 
         while (fgets(lin_buf, buf_size, file))
@@ -105,12 +119,22 @@ int main() {
 
     fclose(file);
 
-    break;
+
     
     case 'C':
+        fopen(filename, "r");
 
+        while (stepsint < stepsint)
+        {
+            printf("%s %s", date, time);
+        }
         
-        printf("Fewest steps: \n");
+        
+        
+        
+
+
+        printf("Fewest steps: %d\n", stepsint);
     break;
 
     case 'D':
