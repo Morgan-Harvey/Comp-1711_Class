@@ -105,5 +105,5 @@ while (fgets(lin_buf, buf_size, file))
 //closes the file
 fclose(file);
 
-return 0;
+
 }

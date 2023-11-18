@@ -1,9 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "FitnessDataStruct.h"
+
 
 // Struct moved to header file
+typedef struct {
+	char date[11];
+	char time[6];
+	int steps;
+} FITNESS_DATA;
 
 // Define any additional variables here
     int count = 0; 
@@ -48,7 +53,6 @@ void tokeniseRecord(const char *input, const char *delimiter,
 
 // Complete the main function
 int main() {
-
     char menu;
     printf("Menu Options\n");
     printf("A: Specify file name\n");
@@ -64,20 +68,19 @@ int main() {
     int buf_size = 1024;
     char lin_buf[buf_size];
     char filename[100] = "./";
+    int stepsint = 0;
 
-    int stepsint = 0;    
+    FILE *file;
 
-    
     switch(menu){
 
     case 'A':
         
         printf("Input file: ");
 	    scanf("%s", fname);
-
-
         strcat(filename, fname);
-        FILE *file = fopen(filename, "r");
+
+        file = fopen(filename, "r");
         if (file == NULL)
         {
             printf("ERROR: Could not find or open the file\n");
@@ -89,41 +92,53 @@ int main() {
         }
 
         while (fgets(lin_buf, buf_size, file)){
+            tokeniseRecord(lin_buf, ",", date, time, steps);
+                int stepsint = atoi(steps);
 
-        tokeniseRecord(lin_buf,",", date, time, steps);
-        stepsint = atoi(steps);
-
-        strcpy(recorddata[count].date, date);
-        strcpy(recorddata[count].time, time);
-        recorddata[count].steps, stepsint;
-    fclose(file);
-
-    case 'B': ;
-
-        fopen(filename,"r");
-
-
-        while (fgets(lin_buf, buf_size, file))
-        {
-            count = count+1; 
-
+            strcpy(recorddata[count].date, date);
+            strcpy(recorddata[count].time, time);
+            recorddata[count].steps = stepsint;
+            count++; 
         }
-        printf("Total records: %d\n", count);
-
     fclose(file);
-
-
+        
+    case 'B': ;
+        printf("Total records: %d\n", count);
     
     case 'C':
+        if (count > 0)
+        {
+            int minsteps = recorddata[0].steps;
+            int minIndex = 0;
+            for (int i = 0; i < count; i++)
+            {
+                if (recorddata[i].steps < minsteps) {
+                    minsteps = recorddata[i].steps;
+                    minIndex = i;
+                }
+            
+            }
+         
+    printf("Fewest Steps: %s %s\n", recorddata[minIndex].date, recorddata[minIndex].time);
+        }
 
+
+    case 'D': 
+    if (count > 0)
+    {
+        int maxsteps = recorddata[0].steps;
+        int maxIndex = 0;
         for (int i = 0; i < count; i++)
         {
-        printf("%d\n", recorddata[i].steps);
+            if (recorddata[i].steps > maxsteps) {
+                maxsteps = recorddata[i].steps;
+                maxIndex = i;
+            }
+        
         }
-            break;
-
-    case 'D':
-        printf("Largest steps: \n");
+    
+        printf("Largest steps: %s %s\n", recorddata[maxIndex].date, recorddata[maxIndex].time);
+    }
     break;
 
     case 'E':
@@ -142,6 +157,6 @@ int main() {
         printf("Invalid Choice: Try again\n");
    }
 
-    }
-
 }
+
+
