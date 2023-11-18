@@ -139,10 +139,23 @@ int main() {
     
         printf("Largest steps: %s %s\n", recorddata[maxIndex].date, recorddata[maxIndex].time);
     }
-    break;
+    
 
     case 'E':
-        printf("Mean step count: \n");
+    if (count > 0){
+        int stepsum = recorddata[0].steps;
+        int sumindex = 1;
+
+        for (int i = 0; i < count; i++)
+        {
+            stepsum = stepsum + recorddata[i].steps;
+            sumindex = i;
+            printf("%d\n",recorddata[i].steps);
+        }
+        int meansteps = stepsum / count;
+
+        printf("Mean step count: %d\n", stepsum);
+    }
     break;
 
     case 'F':
