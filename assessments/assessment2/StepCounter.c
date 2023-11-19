@@ -101,7 +101,8 @@ int main() {
             count++; 
         }
     fclose(file);
-        
+    break;
+
     case 'B': ;
         printf("Total records: %d\n", count);
     
@@ -119,9 +120,9 @@ int main() {
             
             }
          
-    printf("Fewest Steps: %s %s\n", recorddata[minIndex].date, recorddata[minIndex].time);
-        }
-
+        printf("Fewest Steps: %s %s\n", recorddata[minIndex].date, recorddata[minIndex].time);
+    }
+    break;
 
     case 'D': 
     if (count > 0)
@@ -139,27 +140,52 @@ int main() {
     
         printf("Largest steps: %s %s\n", recorddata[maxIndex].date, recorddata[maxIndex].time);
     }
-    
+
+    break;
 
     case 'E':
     if (count > 0){
         int stepsum = recorddata[0].steps;
-        int sumindex = 1;
+        int sumindex = 0;
 
-        for (int i = 0; i < count; i++)
+        for (int i = 1; i < count; i++)
         {
             stepsum = stepsum + recorddata[i].steps;
             sumindex = i;
-            printf("%d\n",recorddata[i].steps);
         }
         int meansteps = stepsum / count;
 
-        printf("Mean step count: %d\n", stepsum);
+        printf("Mean step count: %d\n", meansteps);
     }
+    
     break;
-
     case 'F':
-        printf("Longest period start: \nLongest period end:  \n");
+    if (count > 0){
+        int longest = 0;
+        int current = 0;
+        int start = 0;
+        int end = 0;
+
+        for (int i = 0; i < count; i++)
+            {
+                if (recorddata[i].steps > 500)
+                {
+                    current++;
+                    if (current > longest)
+                    {
+                        longest = current;
+                        start = i - current + 1;
+                        end = i;
+                    }
+                }
+                else
+                {
+                    current = 0;
+                }
+            }  
+    
+        printf("Longest period start: %s %s\nLongest period end:  %s %s\n", recorddata[start].date, recorddata[start].time, recorddata[end].date, recorddata[end].time);
+    }
     break;
 
     case 'Q':
@@ -168,8 +194,10 @@ int main() {
 
     default:
         printf("Invalid Choice: Try again\n");
+        break;
    }
 
+while (menu != 'Q'); 
+    return 0;
+
 }
-
-
