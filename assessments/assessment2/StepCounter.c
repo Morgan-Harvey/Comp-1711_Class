@@ -1,14 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include "FitnessDataStruct.h"
 
 // Struct moved to header file
-typedef struct {
-	char date[11];
-	char time[6];
-	int steps;
-} FITNESS_DATA;
+
 
 // Define any additional variables here
     int count = 0; 
@@ -54,14 +50,7 @@ void tokeniseRecord(const char *input, const char *delimiter,
 // Complete the main function
 int main() {
     char menu;
-    printf("Menu Options\n");
-    printf("A: Specify file name\n");
-    printf("B: Display total records in file\n");
-    printf("C: Find the date and time of the timeslot with the fewest steps\n");
-    printf("D: Find the date and time of the timeslot with the largest number of steps\n");
-    printf("E: Find the mean step count of all the records in the file\n");
-    printf("F: Find the longest continuous period where the step count is above 500 steps\n");
-    printf("Q: QUIT\n");
+    showmenuoptions();
 
     scanf("%c", &menu);
     char fname[100];
@@ -84,6 +73,8 @@ int main() {
         if (file == NULL)
         {
             printf("ERROR: Could not find or open the file\n");
+            showmenuoptions();
+            scanf(" %c", &menu);
             break;
         }
         else
@@ -101,10 +92,15 @@ int main() {
             count++; 
         }
     fclose(file);
+    showmenuoptions();
+    scanf(" %c", &menu);
     break;
 
     case 'B': ;
         printf("Total records: %d\n", count);
+        showmenuoptions();
+        scanf(" %c", &menu);
+        break;
     
     case 'C':
         if (count > 0)
@@ -122,6 +118,8 @@ int main() {
          
         printf("Fewest Steps: %s %s\n", recorddata[minIndex].date, recorddata[minIndex].time);
     }
+    showmenuoptions();
+    scanf(" %c", &menu);
     break;
 
     case 'D': 
@@ -140,7 +138,8 @@ int main() {
     
         printf("Largest steps: %s %s\n", recorddata[maxIndex].date, recorddata[maxIndex].time);
     }
-
+    showmenuoptions();
+    scanf(" %c", &menu);
     break;
 
     case 'E':
@@ -157,8 +156,10 @@ int main() {
 
         printf("Mean step count: %d\n", meansteps);
     }
-    
+    showmenuoptions();
+    scanf(" %c", &menu);
     break;
+
     case 'F':
     if (count > 0){
         int longest = 0;
@@ -186,6 +187,8 @@ int main() {
     
         printf("Longest period start: %s %s\nLongest period end:  %s %s\n", recorddata[start].date, recorddata[start].time, recorddata[end].date, recorddata[end].time);
     }
+    showmenuoptions();
+    scanf(" %c", &menu);
     break;
 
     case 'Q':
@@ -194,10 +197,9 @@ int main() {
 
     default:
         printf("Invalid Choice: Try again\n");
+        showmenuoptions();
+        scanf(" %c", &menu);
         break;
    }
-
-while (menu != 'Q'); 
-    return 0;
 
 }
