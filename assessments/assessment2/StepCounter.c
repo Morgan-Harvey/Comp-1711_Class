@@ -49,10 +49,13 @@ void tokeniseRecord(const char *input, const char *delimiter,
 
 // Complete the main function
 int main() {
+
+    while(1){
     char menu;
     showmenuoptions();
 
     scanf("%c", &menu);
+    getchar();
     char fname[100];
     int buf_size = 1024;
     char lin_buf[buf_size];
@@ -73,8 +76,6 @@ int main() {
         if (file == NULL)
         {
             printf("ERROR: Could not find or open the file\n");
-            showmenuoptions();
-            scanf(" %c", &menu);
             break;
         }
         else
@@ -92,14 +93,10 @@ int main() {
             count++; 
         }
     fclose(file);
-    showmenuoptions();
-    scanf(" %c", &menu);
     break;
 
     case 'B': ;
         printf("Total records: %d\n", count);
-        showmenuoptions();
-        scanf(" %c", &menu);
         break;
     
     case 'C':
@@ -118,8 +115,6 @@ int main() {
          
         printf("Fewest Steps: %s %s\n", recorddata[minIndex].date, recorddata[minIndex].time);
     }
-    showmenuoptions();
-    scanf(" %c", &menu);
     break;
 
     case 'D': 
@@ -138,8 +133,6 @@ int main() {
     
         printf("Largest steps: %s %s\n", recorddata[maxIndex].date, recorddata[maxIndex].time);
     }
-    showmenuoptions();
-    scanf(" %c", &menu);
     break;
 
     case 'E':
@@ -156,8 +149,6 @@ int main() {
 
         printf("Mean step count: %d\n", meansteps);
     }
-    showmenuoptions();
-    scanf(" %c", &menu);
     break;
 
     case 'F':
@@ -187,8 +178,6 @@ int main() {
     
         printf("Longest period start: %s %s\nLongest period end:  %s %s\n", recorddata[start].date, recorddata[start].time, recorddata[end].date, recorddata[end].time);
     }
-    showmenuoptions();
-    scanf(" %c", &menu);
     break;
 
     case 'Q':
@@ -197,9 +186,7 @@ int main() {
 
     default:
         printf("Invalid Choice: Try again\n");
-        showmenuoptions();
-        scanf(" %c", &menu);
-        break;
    }
 
+}
 }
