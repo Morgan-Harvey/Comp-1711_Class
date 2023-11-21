@@ -149,9 +149,9 @@ int main() {
             stepsum = stepsum + recorddata[i].steps;
             sumindex = i;
         }
-        int meansteps = stepsum / count;
+        float meansteps = stepsum / count;
 
-        printf("Mean step count: %d\n", meansteps);
+        printf("Mean step count: %.0f\n", meansteps);
     }
     break;
 
