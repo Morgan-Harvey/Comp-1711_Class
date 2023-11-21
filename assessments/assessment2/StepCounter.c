@@ -141,7 +141,7 @@ int main() {
 
     case 'E':
     if (count > 0){
-        int stepsum = recorddata[0].steps;
+        float stepsum = recorddata[0].steps;
         int sumindex = 0;
 
         for (int i = 1; i < count; i++)
