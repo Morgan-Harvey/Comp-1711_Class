@@ -117,7 +117,7 @@ int main() {
             
             }
          
-        printf("Fewest Steps: %s %s\n", recorddata[minIndex].date, recorddata[minIndex].time);
+        printf("Fewest steps: %s %s\n", recorddata[minIndex].date, recorddata[minIndex].time);
     }
     break;
 
