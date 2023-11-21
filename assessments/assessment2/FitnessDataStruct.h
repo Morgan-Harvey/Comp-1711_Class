@@ -10,6 +10,7 @@ typedef struct {
 	int steps;
 } FITNESS_DATA;
 
+
 // Helper function prototypes
 void tokeniseRecord(const char *input, const char *delimiter, char *date, char *time, char *steps);
 
@@ -22,8 +23,5 @@ void showmenuoptions(){
     printf("F: Find the longest continuous period where the step count is above 500 steps\n");
     printf("Q: QUIT\n");
 }
-
-
-
 
 #endif // FITNESS_DATA_STRUCT_H

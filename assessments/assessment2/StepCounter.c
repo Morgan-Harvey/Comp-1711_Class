@@ -55,7 +55,11 @@ int main() {
     showmenuoptions();
 
     scanf("%c", &menu);
-    getchar();
+    while (getchar() != '\n');
+    {
+        /* code */
+    }
+    
     char fname[100];
     int buf_size = 1024;
     char lin_buf[buf_size];
@@ -67,15 +71,18 @@ int main() {
     switch(menu){
 
     case 'A':
-        
+        count = 0;
         printf("Input file: ");
 	    scanf("%s", fname);
+        while (getchar() != '\n');
+        
         strcat(filename, fname);
 
         file = fopen(filename, "r");
         if (file == NULL)
         {
             printf("ERROR: Could not find or open the file\n");
+            return 1;
             break;
         }
         else
