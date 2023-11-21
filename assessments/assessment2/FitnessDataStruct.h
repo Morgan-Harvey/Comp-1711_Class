@@ -15,6 +15,7 @@ typedef struct {
 void tokeniseRecord(const char *input, const char *delimiter, char *date, char *time, char *steps);
 
 void showmenuoptions(){
+    printf("Menu options: \n");
     printf("A: Specify file name\n");
     printf("B: Display total records in file\n");
     printf("C: Find the date and time of the timeslot with the fewest steps\n");

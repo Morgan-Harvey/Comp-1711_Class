@@ -53,13 +53,10 @@ int main() {
     while(1){
     char menu;
     showmenuoptions();
-
+    printf("Enter choice: ");
     scanf("%c", &menu);
     while (getchar() != '\n');
-    {
-        /* code */
-    }
-    
+
     char fname[100];
     int buf_size = 1024;
     char lin_buf[buf_size];
