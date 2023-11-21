@@ -180,7 +180,7 @@ int main() {
                 }
             }  
     
-        printf("Longest period start: %s %s\nLongest period end:  %s %s\n", recorddata[start].date, recorddata[start].time, recorddata[end].date, recorddata[end].time);
+        printf("Longest period start: %s %s\nLongest period end: %s %s\n", recorddata[start].date, recorddata[start].time, recorddata[end].date, recorddata[end].time);
     }
     break;
 
