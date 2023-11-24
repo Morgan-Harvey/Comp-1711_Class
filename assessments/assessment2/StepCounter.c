@@ -49,32 +49,35 @@ void tokeniseRecord(const char *input, const char *delimiter,
 
 // Complete the main function
 int main() {
-
+    // will loop the switch until user inputs Q or the file name is wrong
     while(1){
+        //displays the menu options and recieves the users menu input
     char menu;
     showmenuoptions();
     printf("Enter choice: ");
     scanf("%c", &menu);
     while (getchar() != '\n');
-
+    // defiunes aditional variables
     char fname[100];
     int buf_size = 1024;
     char lin_buf[buf_size];
     char filename[100] = "./";
     int stepsint = 0;
 
+// designates a file
     FILE *file;
-
+// starts the switch
     switch(menu){
 
     case 'A':
+    // will ask the user to input the filename and store it in a variable
         count = 0;
         printf("Input file: ");
 	    scanf("%s", fname);
         while (getchar() != '\n');
         
         strcat(filename, fname);
-
+        // opens the file amd checks if it exists, if it doesnt error message and exits program
         file = fopen(filename, "r");
         if (file == NULL)
         {
@@ -83,6 +86,7 @@ int main() {
             break;
         }
         else
+        // if it exists will store the data into the type def struct and count the number of records
         {
             printf("file successfully loaded\n");
         }
@@ -99,15 +103,19 @@ int main() {
     fclose(file);
     break;
 
-    case 'B': ;
+    case 'B': 
+    // prints the number of records
         printf("Total records: %d\n", count);
         break;
     
     case 'C':
+    // if statement used to overide label error
         if (count > 0)
         {
+            // will store the first record and the fewest steps index into variable
             int minsteps = recorddata[0].steps;
             int minIndex = 0;
+            // will loop through the typedef data until it finds the index of the record with the fewest steps
             for (int i = 0; i < count; i++)
             {
                 if (recorddata[i].steps < minsteps) {
@@ -116,7 +124,7 @@ int main() {
                 }
             
             }
-         
+         // prints the fewest steps date and time
         printf("Fewest steps: %s %s\n", recorddata[minIndex].date, recorddata[minIndex].time);
     }
     break;
@@ -124,8 +132,10 @@ int main() {
     case 'D': 
     if (count > 0)
     {
+        // will store the first record and the mosts steps index into variable
         int maxsteps = recorddata[0].steps;
         int maxIndex = 0;
+        // will loop through the typedef data until it finds the index of the record with the most steps
         for (int i = 0; i < count; i++)
         {
             if (recorddata[i].steps > maxsteps) {
@@ -134,60 +144,68 @@ int main() {
             }
         
         }
-    
+     // prints the most steps date and time
         printf("Largest steps: %s %s\n", recorddata[maxIndex].date, recorddata[maxIndex].time);
     }
     break;
 
     case 'E':
     if (count > 0){
+        // stores the first record to be added
         float stepsum = recorddata[0].steps;
-        int sumindex = 0;
-
+        // will loop through the typedef adding each steps into a total sum
         for (int i = 1; i < count; i++)
         {
             stepsum = stepsum + recorddata[i].steps;
-            sumindex = i;
         }
+        //will calculate divide the total steps by the unmber of records to calculate mean
         float meansteps = stepsum / count;
-
+        // prints the mean
         printf("Mean step count: %.0f\n", meansteps);
     }
     break;
 
     case 'F':
     if (count > 0){
+        /* variables storing the index variables for the longest period count, Current period, 
+        start of the period index, end of the period index */
         int longest = 0;
         int current = 0;
         int start = 0;
         int end = 0;
 
+        // loops through the typedef checking if each steps is over 500
         for (int i = 0; i < count; i++)
             {
+                // if the data is over 500 then will plus 1 to current
                 if (recorddata[i].steps > 500)
                 {
                     current++;
+                    // if the current is bigger then the longest will replace the longest
                     if (current > longest)
                     {
+                        /* will store the index of the final record larger than 500 as a variable 
+                        and will use that index and the current to calculate the starting record */
                         longest = current;
-                        start = i - current + 1;
                         end = i;
+                        start = i - current + 1;
                     }
                 }
+                // once record reaches 500 or lower will reset the current count to 0
                 else
                 {
                     current = 0;
                 }
             }  
-    
+        // prints the start and end of the longest continuous period
         printf("Longest period start: %s %s\nLongest period end: %s %s\n", recorddata[start].date, recorddata[start].time, recorddata[end].date, recorddata[end].time);
     }
     break;
-
+    // quits the program
     case 'Q':
         return 0;
         break;
-
+    // if an unknown option is chosen will display a message
     default:
         printf("Invalid Choice: Try again\n");
    }
