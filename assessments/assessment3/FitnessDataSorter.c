@@ -65,11 +65,13 @@ int main() {
         }
 
         while (fgets(lin_buf, buf_size, file)){
-            tokeniseRecord(char *record, char delimiter, char *date, char *time, int *steps);
+            tokeniseRecord(lin_buf, ',', date, time, &stepsint);
+
 
             strcpy(recorddata[count].date, date);
             strcpy(recorddata[count].time, time);
             recorddata[count].steps = stepsint;
+            printf("%d\n", recorddata[count].steps);
             count++; 
         }
     fclose(file);
