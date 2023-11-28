@@ -13,7 +13,6 @@ typedef struct {
     FitnessData recorddata[2048]; 
     char date[11]; 
     char time[6];
-    char steps[5];
 
 // Function to tokenize a record
 void tokeniseRecord(char *record, char delimiter, char *date, char *time, int *steps) {
@@ -49,10 +48,10 @@ int main() {
         strcat(filename, fname);
 
         
-        FILE *file;
+        FILE *filefrom;
 
-        file = fopen(filename, "r");
-        if (file == NULL)
+        filefrom = fopen(filename, "r");
+        if (filefrom == NULL)
         {
             printf("ERROR: Could not find or open the file\n");
             return 1;
@@ -64,16 +63,32 @@ int main() {
             printf("file successfully loaded\n");
         }
 
-        while (fgets(lin_buf, buf_size, file)){
+        while (fgets(lin_buf, buf_size, filefrom)){
             tokeniseRecord(lin_buf, ',', date, time, &stepsint);
 
 
             strcpy(recorddata[count].date, date);
             strcpy(recorddata[count].time, time);
             recorddata[count].steps = stepsint;
-            printf("%d\n", recorddata[count].steps);
             count++; 
+
         }
-    fclose(file);
+    fclose(filefrom);
+    int ordered_Steps = recorddata[0].steps;
+    for (int i = 0; i < count; i++)
+    {
+        if (recorddata[count].steps > ordered_Steps)
+        {
+            
+        }
+        
+    }
+    
+
+
+    FILE *fileto;
+    fileto = fopen("FitnessData_2023.csv.tsv", "w");
+
+    
     
 }
