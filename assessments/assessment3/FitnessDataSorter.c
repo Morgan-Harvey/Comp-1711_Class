@@ -9,10 +9,11 @@ typedef struct {
     int steps;
 } FitnessData;
 
-    int count = 0; 
+    int count = 0;
     FitnessData recorddata[2048]; 
     char date[11]; 
     char time[6];
+    int steps[5];
 
 // Function to tokenize a record
 void tokeniseRecord(char *record, char delimiter, char *date, char *time, int *steps) {
@@ -31,7 +32,20 @@ void tokeniseRecord(char *record, char delimiter, char *date, char *time, int *s
         }
     }
 }
+int compar(const void *a, const void *b){
 
+    FitnessData *FitnessDataA = (FitnessData *)a;
+    FitnessData *FitnessDataB = (FitnessData *)b;
+
+    if (FitnessDataA->steps > FitnessDataB->steps)
+    {
+        return -1;
+    }else if (FitnessDataA->steps < FitnessDataB->steps)
+    {
+        return 1;
+    }else
+        return 0;
+}
 
 int main() {
     char fname[100];
@@ -57,11 +71,7 @@ int main() {
             return 1;
             
         }
-        else
-        // if it exists will store the data into the type def struct and count the number of records
-        {
-            printf("file successfully loaded\n");
-        }
+
 
         while (fgets(lin_buf, buf_size, filefrom)){
             tokeniseRecord(lin_buf, ',', date, time, &stepsint);
@@ -74,21 +84,21 @@ int main() {
 
         }
     fclose(filefrom);
-    int ordered_Steps = recorddata[0].steps;
-    for (int i = 0; i < count; i++)
-    {
-        if (recorddata[count].steps > ordered_Steps)
-        {
-            
-        }
-        
-    }
+
+    
+    qsort(recorddata,count, sizeof(recorddata), compar);
     
 
 
     FILE *fileto;
     fileto = fopen("FitnessData_2023.csv.tsv", "w");
 
+    for (int j = 0; j < count; j++)
+    {
+        fprintf(fileto, "%s %s %d\n", recorddata[j].date, recorddata[j].time, recorddata[j].steps);
+    }
     
+fclose(fileto);
+    printf("Data sorted and written to %s.tsv\n", fname);
     
 }
