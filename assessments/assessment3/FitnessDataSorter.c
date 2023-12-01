@@ -86,7 +86,7 @@ int main() {
     fclose(filefrom);
 
     
-    qsort(recorddata,count, sizeof(recorddata), compar);
+    qsort(recorddata,count, sizeof(FitnessData), compar);
     
 
 
