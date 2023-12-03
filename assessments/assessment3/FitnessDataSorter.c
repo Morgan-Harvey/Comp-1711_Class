@@ -32,6 +32,7 @@ void tokeniseRecord(char *record, char delimiter, char *date, char *time, int *s
         }
     }
 }
+
 int compar(const void *a, const void *b){
 
     FitnessData *FitnessDataA = (FitnessData *)a;
@@ -67,7 +68,7 @@ int main() {
         filefrom = fopen(filename, "r");
         if (filefrom == NULL)
         {
-            printf("ERROR: Could not find or open the file\n");
+            printf("Error: invalid file\n");
             return 1;
             
         }
@@ -84,12 +85,17 @@ int main() {
 
         }
     fclose(filefrom);
+    for (int i = 0; i < count; i++)
+    {
+        if (strlen(recorddata[i].date) != 10 || strlen(recorddata[i].time) != 5 || recorddata[i].steps < 0 || recorddata[i].steps > 2000) 
+        {
+            printf("Error: invalid file\n");
+            break;
+            return 1;
+        } else {
 
-    
     qsort(recorddata,count, sizeof(FitnessData), compar);
     
-
-
     FILE *fileto;
     fileto = fopen("FitnessData_2023.csv.tsv", "w");
 
@@ -99,6 +105,7 @@ int main() {
     }
     
 fclose(fileto);
-    printf("Data sorted and written to %s.tsv\n", fname);
-    
+}
+}
+return 0;
 }
