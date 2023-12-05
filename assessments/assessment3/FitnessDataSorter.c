@@ -87,25 +87,26 @@ int main() {
     fclose(filefrom);
     for (int i = 0; i < count; i++)
     {
-        if (strlen(recorddata[i].date) != 10 || strlen(recorddata[i].time) != 5 || recorddata[i].steps < 0 || recorddata[i].steps > 2000) 
+        if (strlen(recorddata[i].date) != 10 || strlen(recorddata[i].time) != 5 || recorddata[i].steps < 0 ) 
         {
             printf("Error: invalid file\n");
-            break;
             return 1;
-        } else {
-
+        } 
+    }
+    
     qsort(recorddata,count, sizeof(FitnessData), compar);
     
     FILE *fileto;
-    fileto = fopen("FitnessData_2023.csv.tsv", "w");
+    strcat(filename,".tsv");
+    fileto = fopen(filename, "w");
 
     for (int j = 0; j < count; j++)
     {
-        fprintf(fileto, "%s %s %d\n", recorddata[j].date, recorddata[j].time, recorddata[j].steps);
+        fprintf(fileto, "%s\t%s\t%d\n", recorddata[j].date, recorddata[j].time, recorddata[j].steps);
     }
     
 fclose(fileto);
-}
-}
+
+printf("Data sorted and written to %s\n",fname);
 return 0;
 }
